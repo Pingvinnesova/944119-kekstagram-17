@@ -11,10 +11,6 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function getRandomName(name) {
-  return name[Math.floor(Math.random() * name.length)];
-}
-
 for (var i = 0; i < 25; i++) {
   photoDescription[i] = {
     url: 'photos/' + i + '.jpg',
@@ -28,7 +24,7 @@ for (var i = 0; i < 25; i++) {
 }
 
 var renderPicture = function (photoDescription) {
-  var pictureElement = picture.cloneNode(true);
+  pictureElement = picture.cloneNode(true);
 
   pictureElement.querySelector('.picture__img src').textContent = photoDescription.url;
   pictureElement.querySelector('.picture__likes').textContent = photoDescription.likes;
@@ -38,7 +34,7 @@ var renderPicture = function (photoDescription) {
 };
 
 var fragment = document.createDocumentFragment();
-  for (var i = 0; i < photoDescription.length; i++) {
+for (var j = 0; j < photoDescription.length; j++) {
   fragment.appendChild(renderPicture(photoDescription[i]));
 }
 
