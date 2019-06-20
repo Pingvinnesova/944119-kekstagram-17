@@ -23,8 +23,8 @@ for (var i = 0; i < 25; i++) {
   };
 }
 
-var renderPicture = function (photoDescription) {
-  pictureElement = picture.cloneNode(true);
+var renderPicture = function () {
+  var pictureElement = picture.cloneNode(true);
 
   pictureElement.querySelector('.picture__img src').textContent = photoDescription.url;
   pictureElement.querySelector('.picture__likes').textContent = photoDescription.likes;
