@@ -17,20 +17,16 @@ var photo = [];
 
 for (var i = 0; i < 25; i++) {
   photo[i] = {
-    url: 'photos/' + i + '.jpg',
+    url: 'photos/' + (i + 1) + '.jpg',
     likes: getRandomNumber(15, 200),
-    comments: {
-      avatar: 'img/avatar-6.svg',
-      message: USERS_COMMENTS[Math.floor(Math.random() * USERS_COMMENTS.length)],
-      name: USERS_NAMES[Math.floor(Math.random() * USERS_NAMES.length)]
-    }
+    comments: [Math.floor(Math.random() * USERS_COMMENTS.length)],
+    avatar: 'img/avatar-' + (Math.floor(Math.random() * 6)) + '.svg',
+    message: USERS_COMMENTS[Math.floor(Math.random() * USERS_COMMENTS.length)],
+    name: USERS_NAMES[Math.floor(Math.random() * USERS_NAMES.length)]
   };
-
-  var photoElement = photo[i];
-
 }
 
-var renderPhoto = function () {
+var renderPhoto = function (photoElement) {
   var pictureElement = pictureTemplate.cloneNode(true);
 
   pictureElement.querySelector('.picture__img').src = photoElement.url;
@@ -40,11 +36,10 @@ var renderPhoto = function () {
   return pictureElement;
 };
 
-
 var fragment = document.createDocumentFragment();
 
 for (var j = 0; j < photo.length; j++) {
-  fragment.appendChild(renderPhoto(photo));
+  fragment.appendChild(renderPhoto(photo[j]));
 }
 
 picturesList.appendChild(fragment);
