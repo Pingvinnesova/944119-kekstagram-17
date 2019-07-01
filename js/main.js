@@ -44,8 +44,6 @@ for (var j = 0; j < photo.length; j++) {
 
 picturesList.appendChild(fragment);
 
-
-
 // ------------------
 
 var ESC_KEYCODE = 27;
@@ -55,13 +53,11 @@ var uploadFile = document.querySelector('#upload-file');
 var imgUpload = document.querySelector('.img-upload__overlay');
 var imgUploadClose = document.querySelector('.img-upload__cancel');
 
-
 var onImgUploadEscPress = function (evt) {
  if (evt.keyCode === ESC_KEYCODE) {
     closeImgUpload();
   }
 };
-
 
 // var onPopupEscPress = function (evt) {
 //   if (userName === document.activeElement) {
@@ -95,73 +91,52 @@ imgUploadClose.addEventListener('click', function () {
 var scaleControlSmaller = document.querySelector('.scale__control--smaller');
 var scaleControlBigger = document.querySelector('.scale__control--bigger');
 var scaleControlValue = document.querySelector('.scale__control--value');
+var imgUploadPreview = document.querySelector('.img-upload__preview');
 
-var value = parseInt(scaleControlValue.value);
-
-scaleControlBigger.addEventListener('click', function() {
-  scaleControlValue.value = value + 25 + '%';
-  return scaleControlValue.value;
+scaleControlBigger.addEventListener('click', function () {
+  if (parseInt(scaleControlValue.value) < 100) {
+    scaleControlValue.value = parseInt(scaleControlValue.value) + 25 + '%';
+    imgUploadPreview.style.transform = 'scale(' + parseInt(scaleControlValue.value) / 100 + ')';
+  } else {
+    scaleControlValue.value = 100 + '%';
+  }
 });
 
 scaleControlSmaller.addEventListener('click', function() {
-  scaleControlValue.value = value - 25 + '%';
-  return scaleControlValue.value;
-
+  if (parseInt(scaleControlValue.value) > 25) {
+    scaleControlValue.value = parseInt(scaleControlValue.value) - 25 + '%';
+    imgUploadPreview.style.transform = 'scale(' + parseInt(scaleControlValue.value) / 100 + ')';
+  } else {
+    scaleControlValue.value = 25 + '%';
+  }
 });
-
-
-// var value = 100;
-// scaleControlValue.value = value + '%';
-
-// var proba = function() {
-//   scaleControlValue.value = value - 25 + '%';
-//   return proba();
-// }
-
-// scaleControlSmaller.addEventListener('click', proba);
-
-// scaleControlBigger.addEventListener('click', function() {
-//   scaleControlValue.value = value + 25 + '%';
-// });
-// ---------------
-
-// effectsRadio.addEventListener('click', function(evt) {
-
-//   if (evt.target.checked) {
-//     preview.classList.add('effects__preview--chrome');
-//   }
-// })
-
 
 var effectsRadio = document.querySelectorAll('.effects__radio');
 var preview = document.querySelector('.img-upload__preview');
 var effectLevelPin = document.querySelector('.effect-level__pin');
-var proba2 = document.querySelector('img-upload__effect-level');
+var effectLevel = document.querySelector('.effect-level');
+var proba = document.querySelector('img-upload__effect-level');
+var effectLevelValue = document.querySelector('.effect-level__value');
+
+effectLevel.classList.add('hidden');
+effectLevelValue.value = 100;
 
 var addFilter = function(pictureEffects) {
-  pictureEffects.addEventListener('click', function() {
-    if(document.getElementById('effect-none').checked) {
-      proba2.classList.add('hidden');
-    } else if(document.getElementById('effect-chrome').checked) {
-      preview.classList.add('effects__preview--chrome');
-    } else if (document.getElementById('effect-sepia').checked) {
-      preview.classList.add('effects__preview--sepia');
-    } else if (document.getElementById('effect-marvin').checked) {
-      preview.classList.add('effects__preview--marvin');
-    } else if (document.getElementById('effect-phobos').checked) {
-      preview.classList.add('effects__preview--phobos');
-    } else if (document.getElementById('effect-heat').checked) {
-      preview.classList.add('effects__preview--heat');
-    }
-  });
-}
+  pictureEffects.addEventListener('click', function(evt) {
+  preview.className = 'img-upload__preview';
+  preview.classList.add('effects__preview--' + evt.target.value);
+
+  if (document.getElementById('effect-none').checked) {
+    effectLevel.classList.add('hidden');
+  } else {
+    effectLevel.classList.remove('hidden');
+  }
+});
+};
 
 for (i = 0; i<effectsRadio.length; i++) {
   addFilter(effectsRadio[i]);
 }
 
-
-
 effectLevelPin.addEventListener('mouseup', function() {
-
 });
