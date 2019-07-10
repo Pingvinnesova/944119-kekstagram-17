@@ -52,21 +52,15 @@ var ESC_KEYCODE = 27;
 var uploadFile = document.querySelector('#upload-file');
 var imgUpload = document.querySelector('.img-upload__overlay');
 var imgUploadClose = document.querySelector('.img-upload__cancel');
+var textDescription = document.querySelector('.text__description');
 
 var onImgUploadEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
+  if (textDescription === document.activeElement) {
+    return evt;
+  } else if (evt.keyCode === ESC_KEYCODE) {
     closeImgUpload();
   }
 };
-
-// var onPopupEscPress = function (evt) {
-//   if (userName === document.activeElement) {
-//     return evt;
-//   } else if (evt.keyCode === ESC_KEYCODE) {
-//     closePopup();
-//   }
-//   return onPopupEscPress();
-// };
 
 var openImgUpload = function () {
   imgUpload.classList.remove('hidden');
@@ -201,4 +195,6 @@ effectLevelPin.addEventListener('mousedown', function (evt) {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
+
+// --------------------
 
