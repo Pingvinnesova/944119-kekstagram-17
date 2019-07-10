@@ -60,6 +60,7 @@ var onImgUploadEscPress = function (evt) {
   } else if (evt.keyCode === ESC_KEYCODE) {
     closeImgUpload();
   }
+  return onImgUploadEscPress();
 };
 
 var openImgUpload = function () {
