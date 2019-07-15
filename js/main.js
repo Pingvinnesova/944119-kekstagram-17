@@ -52,21 +52,16 @@ var ESC_KEYCODE = 27;
 var uploadFile = document.querySelector('#upload-file');
 var imgUpload = document.querySelector('.img-upload__overlay');
 var imgUploadClose = document.querySelector('.img-upload__cancel');
+var textDescription = document.querySelector('.text__description');
 
 var onImgUploadEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
+  if (textDescription === document.activeElement) {
+    return evt;
+  } else if (evt.keyCode === ESC_KEYCODE) {
     closeImgUpload();
   }
+  return onImgUploadEscPress();
 };
-
-// var onPopupEscPress = function (evt) {
-//   if (userName === document.activeElement) {
-//     return evt;
-//   } else if (evt.keyCode === ESC_KEYCODE) {
-//     closePopup();
-//   }
-//   return onPopupEscPress();
-// };
 
 var openImgUpload = function () {
   imgUpload.classList.remove('hidden');
@@ -128,7 +123,7 @@ var addFilter = function (pictureEffects) {
   pictureEffects.addEventListener('click', function (evt) {
     preview.className = 'img-upload__preview';
     preview.classList.add('effects__preview--' + evt.target.value);
-
+    preview.classList.add('effects--' + evt.target.value);
     if (document.getElementById('effect-none').checked) {
       effectLevel.classList.add('hidden');
     } else {
@@ -142,12 +137,6 @@ for (i = 0; i < effectsRadio.length; i++) {
 }
 
 // Перетаскивание
-
-var effectsPrewiewChrome = document.querySelector('.effects__preview--chrome');
-var effectsPrewiewSepia = document.querySelector('.effects__preview--sepia');
-var effectsPrewiewMarvin = document.querySelector('.effects__preview--marvin');
-var effectsPrewiewPhobos = document.querySelector('.effects__preview--phobos');
-var effectsPrewiewHeat = document.querySelector('.effects__preview--heat');
 
 effectLevelPin.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
@@ -170,25 +159,45 @@ effectLevelPin.addEventListener('mousedown', function (evt) {
       y: moveEvt.clientY
     };
 
+    var effects = [
+      {
+        key: 'chrome',
+        style: 'filter: grayscale(' + (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100) + ')'
+      },
+
+      {
+        key: 'sepia',
+        style: 'filter: sepia(' + (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100) + ')'
+      },
+
+      {
+        key: 'marvin',
+        style: 'filter: invert(' + (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth) + '%)'
+      },
+
+      {
+        key: 'phobos',
+        style: 'filter: blur(' + (3 * (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100)) + 'px)'
+      },
+
+      {
+        key: 'heat',
+        style: 'filter: brightness(' + ((2 * (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100)) + 1) + ')'
+      }
+    ];
+
     if ((((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth) <= 100 && (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth) >= 0) {
 
       effectLevelPin.style.left = (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth) + '%';
       effectLevelDepth.style.width = effectLevelPin.style.left;
       effectLevelValue.value = effectLevelPin.style.left;
-    }
 
-    if (preview.classList.contains('effects__preview--chrome')) {
-      effectsPrewiewChrome.style = 'filter: grayscale (' + effectLevelPin.style.left / 100 + ')';
-    } else if (preview.classList.contains('effects__preview--sepia')) {
-      effectsPrewiewSepia.style = 'filter: sepia (' + effectLevelPin.style.left / 100 + ')';
-    } else if (preview.classList.contains('effects__preview--marvin')) {
-      effectsPrewiewMarvin.style = 'filter: invert (' + effectLevelPin.style.left + '%)';
-    } else if (preview.classList.contains('effects__preview--phobos')) {
-      effectsPrewiewPhobos.style = 'filter: blur (' + (3 * effectLevelPin.style.left / 100) + 'px)';
-    } else if (preview.classList.contains('effects__preview--heat')) {
-      effectsPrewiewHeat.style = 'filter: brightness (' + ((2 * effectLevelPin.style.left / 100) + 1) + ')';
+      for (i = 0; i < effects.length; i++) {
+        if (preview.classList.contains('effects--' + effects[i].key)) {
+          document.querySelector('.effects__preview--' + effects[i].key).style = effects[i].style;
+        }
+      }
     }
-
   };
 
   var onMouseUp = function (upEvt) {
@@ -201,4 +210,3 @@ effectLevelPin.addEventListener('mousedown', function (evt) {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
-
