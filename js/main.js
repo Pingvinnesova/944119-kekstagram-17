@@ -136,7 +136,7 @@ for (i = 0; i < effectsRadio.length; i++) {
   addFilter(effectsRadio[i]);
 }
 
-// Перетаскивание
+// ----
 
 effectLevelPin.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
