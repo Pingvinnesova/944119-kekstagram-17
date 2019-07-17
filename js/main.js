@@ -70,6 +70,7 @@ var openImgUpload = function () {
 
 var closeImgUpload = function () {
   imgUpload.classList.add('hidden');
+  uploadFile.value = null;
   document.removeEventListener('keydown', onImgUploadEscPress);
 };
 
@@ -122,6 +123,10 @@ effectLevelValue.value = 100 + '%';
 var addFilter = function (pictureEffects) {
   pictureEffects.addEventListener('click', function (evt) {
     preview.className = 'img-upload__preview';
+    preview.style = null;
+    effectLevelPin.style.left = 100 + '%';
+    effectLevelDepth.style.width = 100 + '%';
+    effectLevelValue.value = 100 + '%';
     preview.classList.add('effects__preview--' + evt.target.value);
     preview.classList.add('effects--' + evt.target.value);
     if (document.getElementById('effect-none').checked) {
@@ -209,4 +214,54 @@ effectLevelPin.addEventListener('mousedown', function (evt) {
 
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
+
+});
+
+// При нажатии мыши на слайдер
+
+effectLevelLine.addEventListener('click', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+    x: evt.offsetX,
+    y: evt.offsetY
+  };
+
+  effectLevelPin.style.left = startCoords.x + 'px';
+  effectLevelDepth.style.width = effectLevelPin.style.left;
+  effectLevelValue.value = effectLevelPin.style.left;
+
+
+  var effects = [
+    {
+      key: 'chrome',
+      // style: 'filter: grayscale(' + (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100) + ')'
+    },
+
+    {
+      key: 'sepia',
+      // style: 'filter: sepia(' + (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100) + ')'
+    },
+
+    {
+      key: 'marvin',
+      // style: 'filter: invert(' + (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth) + '%)'
+    },
+
+    {
+      key: 'phobos',
+      // style: 'filter: blur(' + (3 * (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100)) + 'px)'
+    },
+
+    {
+      key: 'heat',
+      // style: 'filter: brightness(' + ((2 * (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100)) + 1) + ')'
+    }
+  ];
+
+  for (i = 0; i < effects.length; i++) {
+    if (preview.classList.contains('effects--' + effects[i].key)) {
+      document.querySelector('.effects__preview--' + effects[i].key).style = effects[i].style;
+    }
+  }
 });
