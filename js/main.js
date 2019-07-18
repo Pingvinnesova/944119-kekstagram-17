@@ -227,7 +227,7 @@ effectLevelLine.addEventListener('click', function (evt) {
     y: evt.offsetY
   };
 
-  effectLevelPin.style.left = startCoords.x + 'px';
+  effectLevelPin.style.left = (startCoords.x * 100) / effectLevelLine.offsetWidth + '%';
   effectLevelDepth.style.width = effectLevelPin.style.left;
   effectLevelValue.value = effectLevelPin.style.left;
 
@@ -235,27 +235,27 @@ effectLevelLine.addEventListener('click', function (evt) {
   var effects = [
     {
       key: 'chrome',
-      // style: 'filter: grayscale(' + (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100) + ')'
+      style: 'filter: grayscale(' + ((startCoords.x * 100) / effectLevelLine.offsetWidth / 100) + ')'
     },
 
     {
       key: 'sepia',
-      // style: 'filter: sepia(' + (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100) + ')'
+      style: 'filter: sepia(' + ((startCoords.x * 100) / effectLevelLine.offsetWidth / 100) + ')'
     },
 
     {
       key: 'marvin',
-      // style: 'filter: invert(' + (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth) + '%)'
+      style: 'filter: invert(' + (startCoords.x * 100) / effectLevelLine.offsetWidth + '%)'
     },
 
     {
       key: 'phobos',
-      // style: 'filter: blur(' + (3 * (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100)) + 'px)'
+      style: 'filter: blur(' + (3 * ((startCoords.x * 100) / effectLevelLine.offsetWidth / 100)) + 'px)'
     },
 
     {
       key: 'heat',
-      // style: 'filter: brightness(' + ((2 * (((effectLevelPin.offsetLeft - shift.x) * 100) / effectLevelLine.offsetWidth / 100)) + 1) + ')'
+      style: 'filter: brightness(' + ((2 * ((startCoords.x * 100) / effectLevelLine.offsetWidth / 100)) + 1) + ')'
     }
   ];
 
