@@ -221,8 +221,6 @@
 
 // });
 
-
-
 // // При нажатии мыши на слайдер
 
 // effectLevelLine.addEventListener('mouseup', function (evt) {
