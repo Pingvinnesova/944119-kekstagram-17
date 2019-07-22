@@ -42,7 +42,7 @@
 
     pictureElement.querySelector('.picture__img').src = photoElement.url;
     pictureElement.querySelector('.picture__likes').textContent = photoElement.likes;
-    pictureElement.querySelector('.picture__comments').textContent = photoElement.comments;
+    pictureElement.querySelector('.picture__comments').textContent = photoElement.comments.length;
 
     return pictureElement;
   };

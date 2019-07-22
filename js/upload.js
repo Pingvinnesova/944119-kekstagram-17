@@ -21,8 +21,9 @@
 var form = document.querySelector('.img-upload__form');
 
 form.addEventListener('submit', function (evt) {
+  form.querySelector('.img-upload__submit').setAttribute('disabled', 'disabled');
   window.upload(new FormData(form), function () {
-    // document.querySelector('.social__footer-btn').setAttribute('disabled', 'disabled');
+    form.querySelector('.img-upload__submit').removeAttribute('disabled', 'disabled');
     document.querySelector('.img-upload').classList.add('hidden');
   });
   evt.preventDefault();
