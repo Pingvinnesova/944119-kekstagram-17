@@ -11,8 +11,11 @@
       y: evt.clientY
     };
 
+    var dragged = false;
+
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
+      dragged = true;
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -69,9 +72,15 @@
       upEvt.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
-
-
       document.removeEventListener('mouseup', onMouseUp);
+
+      if (dragged) {
+        var onClickPreventDefault = function (dragEvt) {
+          dragEvt.preventDefault();
+          window.preview.effectLevelLine.removeEventListener('click', onClickPreventDefault);
+        };
+        window.preview.effectLevelLine.addEventListener('click', onClickPreventDefault);
+      }
     };
 
     document.addEventListener('mousemove', onMouseMove);
@@ -81,7 +90,7 @@
 
   // При нажатии мыши на слайдер
 
-  window.preview.effectLevelLine.addEventListener('mouseup', function (evt) {
+  window.preview.effectLevelLine.addEventListener('click', function (evt) {
     evt.preventDefault();
 
     var startCoordsNew = {
