@@ -6,6 +6,7 @@
 
     evt.preventDefault();
 
+
     // var startCoords = {
     //   x: evt.clientX,
     //   y: evt.clientY
@@ -20,7 +21,6 @@
     var dragged = false;
 
     var onMouseMove = function (moveEvt) {
-      moveEvt.preventDefault();
       dragged = true;
 
       var MovedCoordinate = function (x, y) {
@@ -106,52 +106,77 @@
 
   });
 
+//   var onEffectArrowPress = function (evt) {
+//     var widthLine = effectLevelLine.offsetWidth;
+//     var start = getPositionPin(widthLine, evt.target.style.left);
+//     var currentEffect = getSettingsCurrentEffect();
+
+//     var movePinKeyArrow = function (moveStep) {
+//     evt.target.style.left = start + moveStep + 'px';
+//     effectLevelDepth.style.width = evt.target.style.left;
+//     changeFilterPreview(currentEffect);
+//   };
+
+// if (evt.keyCode === window.util.ARROW_LEFT && (start - STEP_MOVE_PIN) >= 0) {
+// movePinKeyArrow(-STEP_MOVE_PIN);
+// }
+// if (evt.keyCode === window.util.ARROW_RIGHT && (start + STEP_MOVE_PIN) <= widthLine) {
+// movePinKeyArrow(STEP_MOVE_PIN);
+
+// }
+// };
+
+var resetfilterPreview = function () {
+  window.preview.effectLevelPin.style.left = '';
+    window.preview.effectLevelDepth.style.width = '';
+    window.preview.effectLevelValue.value = '';
+}
+
   // При нажатии мыши на слайдер
 
-  // window.preview.effectLevelLine.addEventListener('click', function (evt) {
-  //   evt.preventDefault();
+  window.preview.effectLevelLine.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    var startCoordsNew = {
+      x: evt.offsetX,
+      y: evt.offsetY
+    };
 
-  //   var startCoordsNew = {
-  //     x: evt.offsetX,
-  //     y: evt.offsetY
-  //   };
-
-  //   window.preview.effectLevelPin.style.left = (startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth + '%';
-  //   window.preview.effectLevelDepth.style.width = window.preview.effectLevelPin.style.left;
-  //   window.preview.effectLevelValue.value = window.preview.effectLevelPin.style.left;
+    window.preview.effectLevelPin.style.left = (startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth + '%';
+    window.preview.effectLevelDepth.style.width = window.preview.effectLevelPin.style.left;
+    window.preview.effectLevelValue.value = window.preview.effectLevelPin.style.left;
 
 
-  //   var effects = [
-  //     {
-  //       key: 'chrome',
-  //       style: 'filter: grayscale(' + ((startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth / 100) + ')'
-  //     },
+    var effects = [
+      {
+        key: 'chrome',
+        style: 'filter: grayscale(' + ((startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth / 100) + ')'
+      },
 
-  //     {
-  //       key: 'sepia',
-  //       style: 'filter: sepia(' + ((startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth / 100) + ')'
-  //     },
+      {
+        key: 'sepia',
+        style: 'filter: sepia(' + ((startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth / 100) + ')'
+      },
 
-  //     {
-  //       key: 'marvin',
-  //       style: 'filter: invert(' + (startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth + '%)'
-  //     },
+      {
+        key: 'marvin',
+        style: 'filter: invert(' + (startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth + '%)'
+      },
 
-  //     {
-  //       key: 'phobos',
-  //       style: 'filter: blur(' + (3 * ((startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth / 100)) + 'px)'
-  //     },
+      {
+        key: 'phobos',
+        style: 'filter: blur(' + (3 * ((startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth / 100)) + 'px)'
+      },
 
-  //     {
-  //       key: 'heat',
-  //       style: 'filter: brightness(' + ((2 * ((startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth / 100)) + 1) + ')'
-  //     }
-  //   ];
+      {
+        key: 'heat',
+        style: 'filter: brightness(' + ((2 * ((startCoordsNew.x * 100) / window.preview.effectLevelLine.offsetWidth / 100)) + 1) + ')'
+      }
+    ];
 
-  //   for (var i = 0; i < effects.length; i++) {
-  //     if (window.preview.imgUploadPreview.classList.contains('effects--' + effects[i].key)) {
-  //       document.querySelector('.effects__preview--' + effects[i].key).style = effects[i].style;
-  //     }
-  //   }
-  // });
+    for (var i = 0; i < effects.length; i++) {
+      if (window.preview.imgUploadPreview.classList.contains('effects--' + effects[i].key)) {
+        document.querySelector('.effects__preview--' + effects[i].key).style = effects[i].style;
+      }
+    }
+  });
 })();

@@ -216,6 +216,15 @@ main {
       grid-template-columns: repeat(7, 1fr);
 }
 
+.pictures-clean {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 10px;
+
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
+}
+
 .picture {
   position: relative;
   line-height: 0;
