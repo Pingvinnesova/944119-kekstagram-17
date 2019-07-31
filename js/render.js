@@ -1,30 +1,41 @@
-// 'use strict';
+'use strict';
 
-// (function () {
-//   var pictureTemplate = document.querySelector('#picture')
-//     .content
-//     .querySelector('.picture');
+(function () {
+  var PICTURE_COUNT = 25;
 
-//   var picturesList = document.querySelector('.pictures');
+  var pictureTemplate = document.querySelector('#picture')
+    .content
+    .querySelector('.picture');
 
-//   var renderPhoto = function (photoElement) {
-//     var pictureElement = pictureTemplate.cloneNode(true);
+  var picturesList = document.querySelector('.pictures');
 
-//     pictureElement.querySelector('.picture__img').src = photoElement.url;
-//     pictureElement.querySelector('.picture__likes').textContent = photoElement.likes;
-//     pictureElement.querySelector('.picture__comments').textContent = photoElement.comments.length;
+  var renderPhoto = function (photoElement, id) {
+    var pictureElement = pictureTemplate.cloneNode(true);
 
-//     return pictureElement;
-//   };
+    pictureElement.querySelector('.picture__img').setAttribute('data-id', id);
+    pictureElement.querySelector('.picture__img').src = photoElement.url;
+    pictureElement.querySelector('.picture__likes').textContent = photoElement.likes;
+    pictureElement.querySelector('.picture__comments').textContent = photoElement.comments.length;
 
-//       window.render = function () {
+    return pictureElement;
+  };
 
-//       var fragment = document.createDocumentFragment();
+  var removeChild = function (elements, block) {
+    for (var i = 0; i < elements.length; i++) {
+      block.removeChild(elements[i]);
+    }
+  };
 
-//       for (var i = 0; i < 25; i++) {
-//         fragment.appendChild(renderPhoto(photo[i]));
-//       }
-//       picturesList.appendChild(fragment);
+  window.removePhoto = function () {
+    removeChild(picturesList.querySelectorAll('.picture'), picturesList);
+  };
 
-//     }
-// })();
+  window.render = function (data) {
+    var takeNumber = data.length > PICTURE_COUNT ? PICTURE_COUNT : data.length;
+    for (var i = 0; i < takeNumber; i++) {
+      picturesList.appendChild(renderPhoto(data[i], i));
+    }
+
+    window.setListners();
+  };
+})();

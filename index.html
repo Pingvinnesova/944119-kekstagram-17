@@ -52,7 +52,7 @@
 
                   <!-- Предварительный просмотр изображения -->
                   <div class="img-upload__preview">
-                    <img src="img/upload-default-image.jpg" alt="Предварительный просмотр фотографии">
+                    <img class="preview-pic" src="img/upload-default-image.jpg" alt="Предварительный просмотр фотографии">
                   </div>
 
                   <!-- Изменение глубины эффекта, накладываемого на изображение -->
@@ -72,7 +72,7 @@
                 <fieldset class="img-upload__effects  effects">
                   <ul class="effects__list">
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-none" value="none">
+                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-none" value="none" checked>
                       <label for="effect-none" class="effects__label">
                         <span class="effects__preview  effects__preview--none">Превью фото без эффекта</span>
                         Оригинал
@@ -107,7 +107,7 @@
                       </label>
                     </li>
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-heat" value="heat" checked>
+                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-heat" value="heat">
                       <label for="effect-heat" class="effects__label">
                         <span class="effects__preview  effects__preview--heat">Превью эффекта Зной</span>
                         Зной
@@ -236,17 +236,25 @@
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
 
-<script src="js/data.js"></script>
+<script src="js/some-variable.js"></script>
 
+<script src="js/popup.js"></script>
+<script src="js/debounce.js"></script>
+<script src="js/random-number.js"></script>
+<script src="js/set-listners.js"></script>
 <script src="js/load.js"></script>
-<!-- <script src="js/similar.js"></script> -->
 <script src="js/render.js"></script>
-<script src="js/similar.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/render-comments.js"></script>
+<script src="js/render.js"></script>
 <script src="js/upload.js"></script>
-<!-- <script src="js/load.js"></script> -->
+<script src="js/message.js"></script>
 <script src="js/form.js"></script>
+<script src="js/validation.js"></script>
 <script src="js/preview.js"></script>
-<script src="js/scaling.js"></script>
 <script src="js/slider.js"></script>
+<script src="js/scaling.js"></script>
+
+<script src="js/picture.js"></script>
 </body>
 </html>
