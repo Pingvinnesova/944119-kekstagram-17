@@ -52,6 +52,9 @@
     uploadFile.value = null;
     window.someVariable.textDescription.removeAttribute('value');
     window.someVariable.textDescription.removeAttribute('style');
+    window.someVariable.textHashtags.removeAttribute('value');
+    window.someVariable.textHashtags.removeAttribute('style');
+    window.someVariable.textHashtags.setCustomValidity('');
     document.removeEventListener('keydown', onImgUploadEscPress);
     imgUploadClose.removeEventListener('keydown', onImgUploadEnterPress);
   };
