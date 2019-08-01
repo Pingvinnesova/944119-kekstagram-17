@@ -36,6 +36,6 @@
       picturesList.appendChild(renderPhoto(data[i], i));
     }
 
-    window.setListners();
+    window.setListeners();
   };
 })();

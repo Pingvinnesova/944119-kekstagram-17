@@ -14,15 +14,13 @@
   var successTemplate = document.querySelector('#success').content;
 
   var renderMessageSuccess = function () {
-    var successElement = successTemplate.cloneNode(true);
-    return successElement;
+    return successTemplate.cloneNode(true);
   };
 
   var errorTemplate = document.querySelector('#error').content;
 
   var renderMessageError = function () {
-    var errorElement = errorTemplate.cloneNode(true);
-    return errorElement;
+    return errorTemplate.cloneNode(true);
   };
 
   var Fragment = document.createDocumentFragment();

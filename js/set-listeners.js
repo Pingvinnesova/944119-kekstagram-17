@@ -4,7 +4,7 @@
   window.savedPhotos = [];
 
   var renderUserData = function () {
-    document.querySelector('.big-picture__img').src = window.savedPhotos[window.index].url;
+    document.querySelector('.big-picture__img img').src = window.savedPhotos[window.index].url;
     document.querySelector('.likes-count').textContent = window.savedPhotos[window.index].likes;
     document.querySelector('.comments-count').textContent = window.savedPhotos[window.index].comments.length;
     document.querySelector('.social__caption').textContent = window.savedPhotos[window.index].description;
@@ -12,7 +12,7 @@
     return renderUserData;
   };
 
-  window.setListners = function () {
+  window.setListeners = function () {
     document.querySelectorAll('.picture__img').forEach(function (item) {
       item.addEventListener('click', function (evt) {
         window.index = evt.target.getAttribute('data-id');

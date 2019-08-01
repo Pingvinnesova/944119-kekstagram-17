@@ -57,8 +57,6 @@
     } else {
       target.setCustomValidity('');
       removeRedBorder(window.someVariable.textHashtags);
-      window.someVariable.textHashtags.removeAttribute('value');
-      window.someVariable.textHashtags.removeAttribute('style');
     }
 
     for (var i = 0; i < arrayOfHashtags.length; i++) {
@@ -77,8 +75,6 @@
       } else {
         target.setCustomValidity('');
         removeRedBorder(window.someVariable.textHashtags);
-        window.someVariable.textHashtags.removeAttribute('value');
-        window.someVariable.textHashtags.removeAttribute('style');
       }
     }
   });

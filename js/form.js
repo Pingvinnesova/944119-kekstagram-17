@@ -35,18 +35,18 @@
     window.someVariable.textDescription.removeAttribute('style');
   };
 
-  var resetfilterPreview = function () {
+  var resetFilterPreview = function () {
     window.Preview.imgUploadPreview.className = 'img-upload__preview';
     window.Preview.imgUploadPreview.style = null;
     window.Preview.effectLevelPin.style.left = 100 + '%';
     window.Preview.effectLevelDepth.style.width = 100 + '%';
     window.Preview.effectLevelValue.value = 100 + '%';
     window.Preview.effectLevel.classList.add('hidden');
-    return resetfilterPreview;
+    return resetFilterPreview;
   };
 
   window.closeImgUpload = function () {
-    resetfilterPreview();
+    resetFilterPreview();
     imgUploadOverlay.classList.add('hidden');
     imgUploadForm.reset();
     uploadFile.value = null;
