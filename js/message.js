@@ -23,13 +23,13 @@
     return errorTemplate.cloneNode(true);
   };
 
-  var Fragment = document.createDocumentFragment();
+  var fragment = document.createDocumentFragment();
 
   var successHandler = function () {
     form.querySelector('.img-upload__submit').removeAttribute('disabled', 'disabled');
     window.closeImgUpload();
-    Fragment.appendChild(renderMessageSuccess());
-    main.appendChild(Fragment);
+    fragment.appendChild(renderMessageSuccess());
+    main.appendChild(fragment);
 
     var successButton = document.querySelector('.success__button');
     var success = document.querySelector('.success');
@@ -70,8 +70,8 @@
   var errorHandler = function () {
 
     window.Preview.imgUpload.classList.add('hidden');
-    Fragment.appendChild(renderMessageError());
-    main.appendChild(Fragment);
+    fragment.appendChild(renderMessageError());
+    main.appendChild(fragment);
 
     var errorButton = document.querySelector('.error__button');
     var error = document.querySelector('.error');

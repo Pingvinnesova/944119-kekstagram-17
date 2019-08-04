@@ -12,7 +12,7 @@
   var renderPhoto = function (photoElement, id) {
     var pictureElement = pictureTemplate.cloneNode(true);
 
-    pictureElement.querySelector('.picture__img').setAttribute('data-id', id);
+    pictureElement.querySelector('.picture__img').setAttribute('data-id', photoElement.id);
     pictureElement.querySelector('.picture__img').src = photoElement.url;
     pictureElement.querySelector('.picture__likes').textContent = photoElement.likes;
     pictureElement.querySelector('.picture__comments').textContent = photoElement.comments.length;

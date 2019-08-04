@@ -55,9 +55,11 @@
     window.debounce(updatesCommentedPictures);
   });
 
-  var successHandler = function (photo) {
-
-    window.savedPhotos = photo;
+  var successHandler = function (photos) {
+    for (var i = 0; i < photos.length; i++) {
+      photos[i]['id'] = i * Math.random();
+    }
+    window.savedPhotos = photos;
 
     updatesOriginalPictures();
 
