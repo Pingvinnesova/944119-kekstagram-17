@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-
+  var ORIGINAL_COMMENT_COUNT = 5;
   window.savedPhotos = [];
 
   var renderUserData = function (currentPhoto) {
@@ -15,9 +15,9 @@
     var allPictures = document.querySelectorAll('.picture__img');
     allPictures.forEach(function (item) {
       var renderData = function () {
-        var commentsCommentShow = 5;
+        var commentsCountShow = 5;
         var socialCounter = document.querySelector('.comment-counter');
-        socialCounter.textContent = 5;
+        socialCounter.textContent = ORIGINAL_COMMENT_COUNT;
         var currentPhoto;
         window.id = item.getAttribute('data-id');
         window.savedPhotos.forEach(function (savedPhotoItem) {
@@ -35,24 +35,23 @@
         socialCommentCount.classList.remove('hidden');
 
         var commentsLength = currentPhoto.comments.length;
-        if (commentsLength <= 5) {
+        if (commentsLength <= ORIGINAL_COMMENT_COUNT) {
           commentsLoader.classList.add('hidden');
           socialCommentCount.classList.add('hidden');
         }
         var commentsCopy = currentPhoto.comments.slice();
-        currentPhoto.comments = currentPhoto.comments.slice(0, commentsCommentShow);
+        currentPhoto.comments = currentPhoto.comments.slice(0, commentsCountShow);
         window.renderComments(currentPhoto);
-        // var commentsCount = document.querySelector('.comment-count');
 
         commentsLoader.addEventListener('click', function () {
           // socialCommentCount.classList.add('hidden');
-          if (commentsCommentShow < commentsLength) {
+          if (commentsCountShow < commentsLength) {
 
-            commentsCommentShow += 5;
-            socialCounter.textContent = commentsCommentShow;
-            currentPhoto.comments = commentsCopy.slice(0, commentsCommentShow);
+            commentsCountShow += ORIGINAL_COMMENT_COUNT;
+            socialCounter.textContent = commentsCountShow;
+            currentPhoto.comments = commentsCopy.slice(0, commentsCountShow);
 
-            if (commentsCommentShow >= commentsLength) {
+            if (commentsCountShow >= commentsLength) {
               commentsLoader.classList.add('hidden');
               socialCommentCount.classList.add('hidden');
             }
@@ -64,16 +63,6 @@
       item.addEventListener('click', function () {
         renderData();
       });
-
-      var onSmallPictureEnter = function (evt) {
-        if (evt.keyCode === window.KeyCode.ENTER_KEYCODE) {
-          renderData();
-        }
-        return onSmallPictureEnter;
-      };
-
-      // enter на сфокусированную миниатюру
-      item.addEventListener('keydown', onSmallPictureEnter);
     });
   };
 })();

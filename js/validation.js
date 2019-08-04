@@ -50,6 +50,7 @@
 
   window.someVariable.textHashtags.addEventListener('input', function (evt) {
     turnStringToArray();
+
     var target = evt.target;
     if ((arrayOfHashtags.length + 1) > HASHTAG_COUNT) {
       target.setCustomValidity('Хештегов не может быть больше 5х');
@@ -69,6 +70,9 @@
       } else if (arrayOfHashtags[i].length === HASHTAG_SYMBOL) {
         target.setCustomValidity('Хештег не может состоять из 1го символа');
         addRedBorder(window.someVariable.textHashtags);
+      } else if (arrayOfHashtags[i].length === 0) {
+        target.setCustomValidity('');
+        removeRedBorder(window.someVariable.textHashtags);
       } else if (!checkUnique(arrayOfHashtags)) {
         target.setCustomValidity('Хештеги не должны повторяться');
         addRedBorder(window.someVariable.textHashtags);

@@ -9,7 +9,7 @@
 
   var picturesList = document.querySelector('.pictures');
 
-  var renderPhoto = function (photoElement, id) {
+  var renderPhoto = function (photoElement) {
     var pictureElement = pictureTemplate.cloneNode(true);
 
     pictureElement.querySelector('.picture__img').setAttribute('data-id', photoElement.id);
